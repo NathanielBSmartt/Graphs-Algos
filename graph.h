@@ -39,8 +39,7 @@ typedef struct Graph
 
 }  Graph;
 
-
-Graph* createGraph( int numVertex );
+Graph* createGraph( int numVertex ); // creates an empty graph of size numVertex
 void freeGraph( Graph* g );
 
 void addVertex( Graph* g, graphType p );
@@ -54,11 +53,11 @@ bool getSuccessor( Graph* g, graphType start, graphType* pnext );
 bool getPredecessor( Graph* g, graphType start, graphType* pprev );
 
 void setVisited( Graph* g, graphType p, bool value );
-bool getVisited( Graph* g, graphType p );
+bool getVisited( Graph* g, graphType p ); 
 
-void setDistance( Graph* g, graphType from, graphType to, double dist );
-double getDistance( Graph* g, graphType from, graphType to );
+void setDistance( Graph* g, graphType from, graphType to, double dist ); // sets the distance from 'from' to 'to'
+double getDistance( Graph* g, graphType from, graphType to ); // returns the distance from 'from' to 'to' or INT_MAX if there is no path
 
-void dijkstrasAlg( Graph* g, graphType start );
+void dijkstrasAlg( Graph* g, graphType start ); // dijkstras algorithm for shortest path search
 
 #endif

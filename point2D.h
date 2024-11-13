@@ -10,8 +10,8 @@ typedef struct Point2D
     int y;
 }  Point2D;
 
-bool equals( Point2D p1, Point2D p2 );
-Point2D createPoint( int x, int y );
+bool equals( Point2D p1, Point2D p2 ); // returns true if the two points are equal
+Point2D createPoint( int x, int y ); 
 long getKey( Point2D p );
 
 #endif
