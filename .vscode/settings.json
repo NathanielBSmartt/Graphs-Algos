@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "point2d.h": "c",
+        "graph.h": "c"
+    }
+}

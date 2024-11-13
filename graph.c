@@ -88,7 +88,7 @@ void addVertex( Graph* g, graphType p ){
 
     /* Check if vertex already in graph */
     if( i!=-1 ){
-        printf("WARNING - addVertex - Attempt to add same graphType to graph multiple times\n");
+        //printf("WARNING - addVertex - Attempt to add same graphType to graph multiple times\n");
         return;
     }
 

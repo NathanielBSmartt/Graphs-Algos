@@ -14,7 +14,7 @@
 #define MAX_MAZE_PRINT 45
 
 /* Print color coding for output (may not work outside of Linux environment) */
-#define MAZE_PRINT_COLOR false
+#define MAZE_PRINT_COLOR true
 
 /* parameters to determine how to test student hasPath function */
 #define TEST_HASPATH true
