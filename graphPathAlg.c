@@ -167,19 +167,20 @@ pathResult findNearestFinish( array2D *maze, int *spDist )
         }
     }
 
-    //Create the graph
+    //Create the graph and update shortest paths
     Graph* mazeGraph = buildGraph( maze );
+    dijkstrasAlg( mazeGraph, start );
 
-    //Run dijkstras for each finish and find the smallest distance
+    //find the shortest finish path
     for( k = 0; k < numFinish; k++ ) {
-        if( getDistance( mazeGraph, start, finish[k] ) < distanceTracker ) {
+        if( getDistance( mazeGraph, start, finish[k] ) <= distanceTracker ) {
             distanceTracker = getDistance( mazeGraph, start, finish[k] );
         }
 
     }
 
     (*spDist) = distanceTracker;
-    return ( (*spDist) == INT_MAX ) ? PATH_IMPOSSIBLE : PATH_FOUND; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
+    return ( hasPath( maze ) ) ? PATH_FOUND : PATH_IMPOSSIBLE; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 
 }
 
