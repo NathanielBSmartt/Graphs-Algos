@@ -11,12 +11,16 @@
 #include "priorityQueuePoint2D.h"
 #include "array2D.h"
 
-typedef enum pathResult{ PATH_IMPOSSIBLE, PATH_FOUND, PATH_UNKNOWN } pathResult;
+typedef enum pathResult
+{
+    PATH_IMPOSSIBLE,
+    PATH_FOUND,
+    PATH_UNKNOWN
+} pathResult;
 
-void printName( );
-
-pathResult hasPath( array2D *maze );
-pathResult findNearestFinish( array2D *maze, int *spDist );
-pathResult findTunnelRoute( array2D *maze, int k );
+void printName();
+pathResult hasPath(array2D *maze);
+pathResult findNearestFinish(array2D *maze, int *spDist);
+pathResult findTunnelRoute(array2D *maze, int k);
 
 #endif
