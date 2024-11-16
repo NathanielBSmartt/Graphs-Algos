@@ -16,59 +16,105 @@ void printName()
 
 Graph *buildGraphx(array2D *maze /* and other parameters you find helpful */)
 {
-    // OPTIONAL TODO: Translate the given maze into a graph.  'X' represents impassable locations.  Only moves of up, down, left, and right are allowed.
-    /* With the right parameters this can be used by all three functions below to build the graph representing their different maze problems. */
-    /* HINT 1: To solve this, my solution used the functions createGraph and setEdge from graph.c */
-    /* HINT 2: My solution also used createPoint from point2D.c */
-    Graph *graphMaze = createGraph(maze->length * maze->width + maze->width * maze->length);
+
+    Graph *graphMaze = createGraph(maze->length * maze->width + maze->length * maze->width);
     int i, j = 0;
 
     for (i = 0; i < maze->length; i++)
     {
         for (j = 0; j < maze->width; j++)
         {
+            if (maze->array2D[i][j] == ' ' || maze->array2D[i][j] == 'S' || maze->array2D[i][j] == 'F')
+            {
+                Point2D curPoint = createPoint(i, j);
+                addVertex(graphMaze, curPoint);
 
-            Point2D curPoint = createPoint(i, j);
+                if (i > 0 && (maze->array2D[i - 1][j] == ' ' || maze->array2D[i - 1][j] == 'S' || maze->array2D[i - 1][j] == 'F'))
+                {
+                    Point2D up = createPoint(i - 1, j);
+                    setEdge(graphMaze, curPoint, up, 0);
+                }
+                else
+                {
+                    Point2D up = createPoint(i - 1, j);
+                    setEdge(graphMaze, curPoint, up, 1);
+                }
+                if (j > 0 && (maze->array2D[i][j - 1] == ' ' || maze->array2D[i][j - 1] == 'S' || maze->array2D[i][j - 1] == 'F'))
+                {
+                    Point2D left = createPoint(i, j - 1);
+                    setEdge(graphMaze, curPoint, left, 0);
+                }
+                else
+                {
+                    Point2D left = createPoint(i, j - 1);
+                    setEdge(graphMaze, curPoint, left, 1);
+                }
+                if (i < maze->length - 1 && (maze->array2D[i + 1][j] == ' ' || maze->array2D[i + 1][j] == 'S' || maze->array2D[i + 1][j] == 'F'))
+                {
+                    Point2D down = createPoint(i + 1, j);
+                    setEdge(graphMaze, curPoint, down, 0);
+                }
+                else
+                {
+                    Point2D down = createPoint(i + 1, j);
+                    setEdge(graphMaze, curPoint, down, 1);
+                }
+                if (j < maze->width - 1 && (maze->array2D[i][j + 1] == ' ' || maze->array2D[i][j + 1] == 'S' || maze->array2D[i][j + 1] == 'F'))
+                {
+                    Point2D right = createPoint(i, j + 1);
+                    setEdge(graphMaze, curPoint, right, 0);
+                }
+                else
+                {
+                    Point2D right = createPoint(i, j + 1);
+                    setEdge(graphMaze, curPoint, right, 1);
+                }
+            }
+            else
+            {
+                Point2D curPoint = createPoint(i, j);
+                addVertex(graphMaze, curPoint);
 
-            if (i > 0 && (maze->array2D[i - 1][j] == ' ' || maze->array2D[i - 1][j] == 'S' || maze->array2D[i - 1][j] == 'F'))
-            {
-                Point2D up = createPoint(i - 1, j);
-                setEdge(graphMaze, curPoint, up, 0);
-            }
-            else
-            {
-                Point2D up = createPoint(i - 1, j);
-                setEdge(graphMaze, curPoint, up, 1);
-            }
-            if (j > 0 && (maze->array2D[i][j - 1] == ' ' || maze->array2D[i][j - 1] == 'S' || maze->array2D[i][j - 1] == 'F'))
-            {
-                Point2D left = createPoint(i, j - 1);
-                setEdge(graphMaze, curPoint, left, 0);
-            }
-            else
-            {
-                Point2D left = createPoint(i - 1, j);
-                setEdge(graphMaze, curPoint, left, 1);
-            }
-            if (i < maze->length - 1 && (maze->array2D[i + 1][j] == ' ' || maze->array2D[i + 1][j] == 'S' || maze->array2D[i + 1][j] == 'F'))
-            {
-                Point2D down = createPoint(i + 1, j);
-                setEdge(graphMaze, curPoint, down, 0);
-            }
-            else
-            {
-                Point2D down = createPoint(i - 1, j);
-                setEdge(graphMaze, curPoint, down, 1);
-            }
-            if (j < maze->width - 1 && (maze->array2D[i][j + 1] == ' ' || maze->array2D[i][j + 1] == 'S' || maze->array2D[i][j + 1] == 'F'))
-            {
-                Point2D right = createPoint(i, j + 1);
-                setEdge(graphMaze, curPoint, right, 0);
-            }
-            else
-            {
-                Point2D right = createPoint(i - 1, j);
-                setEdge(graphMaze, curPoint, right, 1);
+                if (i > 0 && (maze->array2D[i - 1][j] == ' ' || maze->array2D[i - 1][j] == 'S' || maze->array2D[i - 1][j] == 'F'))
+                {
+                    Point2D up = createPoint(i - 1, j);
+                    setEdge(graphMaze, curPoint, up, 0);
+                }
+                else
+                {
+                    Point2D up = createPoint(i - 1, j);
+                    setEdge(graphMaze, curPoint, up, 1);
+                }
+                if (j > 0 && (maze->array2D[i][j - 1] == ' ' || maze->array2D[i][j - 1] == 'S' || maze->array2D[i][j - 1] == 'F'))
+                {
+                    Point2D left = createPoint(i, j - 1);
+                    setEdge(graphMaze, curPoint, left, 0);
+                }
+                else
+                {
+                    Point2D left = createPoint(i, j - 1);
+                    setEdge(graphMaze, curPoint, left, 1);
+                }
+                if (i < maze->length - 1 && (maze->array2D[i + 1][j] == ' ' || maze->array2D[i + 1][j] == 'S' || maze->array2D[i + 1][j] == 'F'))
+                {
+                    Point2D down = createPoint(i + 1, j);
+                    setEdge(graphMaze, curPoint, down, 0);
+                }
+                else
+                {
+                    Point2D down = createPoint(i + 1, j);
+                    setEdge(graphMaze, curPoint, down, 1);
+                }
+                if (j < maze->width - 1 && (maze->array2D[i][j + 1] == ' ' || maze->array2D[i][j + 1] == 'S' || maze->array2D[i][j + 1] == 'F'))
+                {
+                    Point2D right = createPoint(i, j + 1);
+                    setEdge(graphMaze, curPoint, right, 0);
+                }
+                else
+                {
+                    Point2D right = createPoint(i, j + 1);
+                    setEdge(graphMaze, curPoint, right, 1);
+                }
             }
         }
     }
@@ -138,8 +184,8 @@ pathResult hasPath(array2D *maze)
     /* HINT 2: My solution also used createPoint from point2D.c */
     /* HINT 3: You might also consider using the new helper function buildGraph to build the graph representing maze. */
 
-    Point2D start;
-    Point2D finish;
+    Point2D start = createPoint(0, 0);
+    Point2D finish = createPoint(0, 0);
     int i = 0;
     int j = 0;
     for (i = 0; i < maze->length; i++)
@@ -263,6 +309,7 @@ pathResult findNearestFinish(array2D *maze, int *spDist)
     }
 
     (*spDist) = distanceTracker;
+
     return (hasPath(maze)) ? PATH_FOUND : PATH_IMPOSSIBLE; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 }
 
@@ -319,6 +366,7 @@ pathResult findTunnelRoute(array2D *maze, int k)
 
     // build the graph
     Graph *mazeGraph = buildGraphx(maze);
+    dijkstrasAlg(mazeGraph, start);
 
-    return PATH_FOUND; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
+    return (k <= getDistance(mazeGraph, start, finish) - 1) ? PATH_IMPOSSIBLE : PATH_FOUND; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 }
