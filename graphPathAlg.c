@@ -184,8 +184,13 @@ pathResult hasPath(array2D *maze)
     /* HINT 2: My solution also used createPoint from point2D.c */
     /* HINT 3: You might also consider using the new helper function buildGraph to build the graph representing maze. */
 
-    Point2D start = createPoint(0, 0);
-    Point2D finish = createPoint(0, 0);
+    Point2D start;
+    start.x = -1;
+    start.y = -1;
+    Point2D finish;
+    finish.x = -1;
+    finish.y = -1;
+
     int i = 0;
     int j = 0;
     for (i = 0; i < maze->length; i++)
@@ -224,7 +229,11 @@ pathResult hasPath(array2D *maze)
 
     dijkstrasAlg(mazeGraph, start);
 
-    return (getDistance(mazeGraph, start, finish) == INT_MAX) ? PATH_IMPOSSIBLE : PATH_FOUND; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
+    pathResult result = (getDistance(mazeGraph, start, finish) == INT_MAX) ? PATH_IMPOSSIBLE : PATH_FOUND;
+
+    freeGraph(mazeGraph);
+
+    return result; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 }
 
 /* findNearestFinish
@@ -243,7 +252,7 @@ pathResult findNearestFinish(array2D *maze, int *spDist)
     /* HINT 3: You might also consider using the new helper function buildGraph to build the graph representing maze. */
 
     Point2D start;
-    Point2D *finish;
+    Point2D* finish = NULL;
     int distanceTracker = INT_MAX;
     int numFinish = 0;
     int i = 0;
@@ -309,8 +318,11 @@ pathResult findNearestFinish(array2D *maze, int *spDist)
     }
 
     (*spDist) = distanceTracker;
+    pathResult result = (hasPath(maze)) ? PATH_FOUND : PATH_IMPOSSIBLE;
 
-    return (hasPath(maze)) ? PATH_FOUND : PATH_IMPOSSIBLE; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
+    freeGraph(mazeGraph);
+
+    return result; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 }
 
 /* findTunnelRoute
@@ -368,5 +380,8 @@ pathResult findTunnelRoute(array2D *maze, int k)
     Graph *mazeGraph = buildGraphx(maze);
     dijkstrasAlg(mazeGraph, start);
 
-    return (k <= getDistance(mazeGraph, start, finish) - 1) ? PATH_IMPOSSIBLE : PATH_FOUND; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
+    pathResult result = (k <= getDistance(mazeGraph, start, finish) - 1) ? PATH_IMPOSSIBLE : PATH_FOUND;
+
+    freeGraph(mazeGraph);
+    return result; /* TODO: Replace with PATH_FOUND or PATH_IMPOSSIBLE based on whether a path exists */
 }
